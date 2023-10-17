@@ -21,36 +21,36 @@ endfunction
 function! s:sort_chars() abort
   execute "normal! `[v`]y"
 
-  let l:prefix
-  let l:delimiter
-  let l:suffix
+  let prefix
+  let delimiter
+  let suffix
 
-  let l:startpos = match(@@, '\v\i')
-  let l:parts = split(@@, '\v\i+')
+  let startpos = match(@@, '\v\i')
+  let parts = split(@@, '\v\i+')
 
   if startpos > 0
-    l:prefix = parts[0]
-    l:delimiter = parts[1]
-    l:suffix = parts[-1]
+    let prefix = parts[0]
+    let delimiter = parts[1]
+    let suffix = parts[-1]
   else
-    l:prefix = ''
-    l:delimiter = parts[0]
-    l:suffix = ''
+    let prefix = ''
+    let delimiter = parts[0]
+    let suffix = ''
   endif
 
-  if l:prefix == l:delimiter
-    l:prefix = ''
+  if prefix == delimiter
+    let prefix = ''
   endif
 
-  if l:suffix == l:delimiter
-    l:suffix = ''
+  if suffix == delimiter
+    let suffix = ''
   endif
 
-  let sortstart = strlen(l:prefix)
-  let sortend = strlen(@@) - sortstart - strlen(l:suffix)
+  let sortstart = strlen(prefix)
+  let sortend = strlen(@@) - sortstart - strlen(suffix)
   let sortables = strpart(@@, sortstart, sortend)
   let sorted = join(sort(split(sortables, '\V' . escape(delimiter, '\'))), delimiter)
-  execute "normal! v`]c" . l:prefix . sorted . l:suffix
+  execute "normal! v`]c" . prefix . sorted . suffix
   execute "normal! `["
 endfunction
 
