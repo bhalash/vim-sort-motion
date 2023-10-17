@@ -21,10 +21,6 @@ endfunction
 function! s:sort_chars() abort
   execute "normal! `[v`]y"
 
-  let prefix
-  let delimiter
-  let suffix
-
   let startpos = match(@@, '\v\i')
   let parts = split(@@, '\v\i+')
 
