@@ -41,15 +41,16 @@ function! s:sort_chars() abort
   if l:prefix == l:delimiter
     l:prefix = ''
   endif
+
   if l:suffix == l:delimiter
     l:suffix = ''
   endif
 
-  let sortstart = strlen(prefix)
-  let sortend = strlen(@@) - sortstart - strlen(suffix)
+  let sortstart = strlen(l:prefix)
+  let sortend = strlen(@@) - sortstart - strlen(l:suffix)
   let sortables = strpart(@@, sortstart, sortend)
   let sorted = join(sort(split(sortables, '\V' . escape(delimiter, '\'))), delimiter)
-  execute "normal! v`]c" . prefix . sorted . suffix
+  execute "normal! v`]c" . l:prefix . sorted . l:suffix
   execute "normal! `["
 endfunction
 
