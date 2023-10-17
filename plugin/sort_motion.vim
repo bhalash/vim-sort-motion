@@ -8,7 +8,6 @@ if exists('g:loaded_sort_motion') || &cp || v:version < 700
 endif
 
 let g:loaded_sort_motion = 1
-
 let s:sort_motion = get(g:, 'sort_motion', 'gs')
 let s:sort_motion_visual = get(g:, 'sort_motion_visual', 'gs')
 let s:sort_lines = s:sort_motion_visual . 's'

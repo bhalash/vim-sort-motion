@@ -10,7 +10,7 @@ function! sort_motion#sort_motion(mode) abort
   if a:mode == 'line'
     call s:sort_line()
   elseif a:mode == 'char'
-    call s:#sort_chars()
+    call s:sort_chars()
   elseif a:mode == 'V'
     call s:sort_visual()
   elseif a:mode == '^V'
@@ -18,25 +18,33 @@ function! sort_motion#sort_motion(mode) abort
   endif
 endfunction
 
-function! sort_motion#sort_chars() abort
+function! s:ort_chars() abort
   execute "normal! `[v`]y"
-  let startpos = match(@@, '\v\i')
-  let parts = split(@@, '\v\i+')
+
+  let l:prefix
+  let l:delimiter
+  let l:suffix
+
+  let l:startpos = match(@@, '\v\i')
+  let l:parts = split(@@, '\v\i+')
+
   if startpos > 0
-    let prefix = parts[0]
-    let delimiter = parts[1]
-    let suffix = parts[-1]
+    l:prefix = parts[0]
+    l:delimiter = parts[1]
+    l:suffix = parts[-1]
   else
-    let prefix = ''
-    let delimiter = parts[0]
-    let suffix = ''
+    l:prefix = ''
+    l:delimiter = parts[0]
+    l:suffix = ''
   endif
-  if prefix == delimiter
-    let prefix = ''
+
+  if l:prefix == l:delimiter
+    l:prefix = ''
   endif
-  if suffix == delimiter
-    let suffix = ''
+  if l:suffix == l:delimiter
+    l:suffix = ''
   endif
+
   let sortstart = strlen(prefix)
   let sortend = strlen(@@) - sortstart - strlen(suffix)
   let sortables = strpart(@@, sortstart, sortend)
