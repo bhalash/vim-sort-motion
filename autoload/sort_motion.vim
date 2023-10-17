@@ -18,7 +18,7 @@ function! sort_motion#sort_motion(mode) abort
   endif
 endfunction
 
-function! s:ort_chars() abort
+function! s:sort_chars() abort
   execute "normal! `[v`]y"
 
   let l:prefix
